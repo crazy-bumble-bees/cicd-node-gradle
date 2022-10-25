@@ -1,0 +1,21 @@
+plugins {
+  id "com.github.node-gradle.node" version "3.5.0"
+}
+
+node {
+    download=true
+}
+
+task build
+
+task myScript(type: NodeTask) {
+    dependsOn npmInstall
+    script = file('app.js')
+}
+
+task hello{
+  print("Hello world")
+}
+
+myScript.dependsOn hello
+build.dependsOn myScript 
